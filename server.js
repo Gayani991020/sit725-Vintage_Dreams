@@ -57,16 +57,10 @@ app.use('/', express.static(path.join(__dirname, '/public')));
 
 // routes
 app.use('/', require('./routes/root'));
-app.use('/register', require('./routes/register'));
-app.use('/auth', require('./routes/auth'));
-app.use('/logout', require('./routes/logout'));
 
 app.use(verifySession);
-app.use('/user', require('./routes/api/user'));
-app.use('/admin', require('./routes/api/admin'));
-app.use('/products', require('./routes/api/products'));
 app.use('/cart', require('./routes/api/cart'));
-app.use('/order', require('./routes/api/order'));
+
 
 app.all('*', (req, res) => {
     res.status(404);
