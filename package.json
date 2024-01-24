@@ -22,6 +22,10 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.4.3",
     "express-session": "^1.17.3",
+<<<<<<< HEAD
+=======
+    "install": "^0.13.0",
+>>>>>>> 5b469ff2169d7d43d5a4ce371e6ed6cf206c37ce
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.11",
     "uuid": "^8.3.2"

@@ -418,6 +418,7 @@
                 </div>
 
                 <div class="block2-txt-child2 flex-r p-t-3">
+<<<<<<< HEAD
                   <a
                     href="#"
                     class="btn-addwish-b2 dis-block pos-relative js-addwish-b2"
@@ -433,6 +434,14 @@
                       alt="ICON"
                     />
                   </a>
+=======
+                  <button
+                    data-product-id="<%= product._id %>"
+                    class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 add-wishlist"
+                  >
+                    W
+                  </button>
+>>>>>>> 5b469ff2169d7d43d5a4ce371e6ed6cf206c37ce
                 </div>
               </div>
             </div>
@@ -668,7 +677,11 @@
     </script>
     <!--===============================================================================================-->
     <script src="js/main.js"></script>
+<<<<<<< HEAD
     <script src="js/sweetalert2@11.js"></script>
+=======
+    <!-- <script src="js/sweetalert2@11.js"></script> -->
+>>>>>>> 5b469ff2169d7d43d5a4ce371e6ed6cf206c37ce
     <script>
       // quickviewBtn click event
       $(".quickviewBtn").on("click", function (e) {
@@ -815,6 +828,45 @@
           });
         }
       });
+<<<<<<< HEAD
+=======
+
+      // .add-wishlist btn click event
+      $(".add-wishlist").click(function () {
+        var productId = $(this).data("product-id");
+        $.ajax({
+          url: "/wishlist",
+          method: "POST",
+          contentType: "application/json", // Set the content type to JSON
+          data: { product: productId }, // Stringify the data
+          success: function (response) {
+            if (response.status == 201 || response.status == 200) {
+              // show success message
+              Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Product added to wishlist successfully."
+              });
+            } else {
+              // show error message
+              Swal.fire({
+                icon: "warning",
+                title: "Warning",
+                text: response.message ? response.message : "Unabled to add to wishlist! If you're not logged in, please log in to add product to wishlist.",
+              });
+            }
+          },
+          error: function (err, xhr, status) {
+            // show error message
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Something Went wrong! If you're not logged in, please log in to add product to wishlist.",
+            });
+          },
+        });
+      });
+>>>>>>> 5b469ff2169d7d43d5a4ce371e6ed6cf206c37ce
     </script>
   </body>
 </html>
