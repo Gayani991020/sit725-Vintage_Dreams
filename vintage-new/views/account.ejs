@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vintage-Dreams</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div>
+      <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Vintage-Dreams</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/user/account">My Account</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/user/cart"
+                  >My Cart
+                  <span class="badge text-bg-info"
+                    ><%= cart?.items?.length %></span
+                  ></a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/user/whishlist"
+                  >My Wishlist <span class="badge text-bg-info"><%= wishlist?.items?.length %></span></a
+                >
+              </li>
+            </ul>
+            <div>
+              <a class="btn btn-outline-dark" href="/login">Login/Login</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="w-100 p-5 py-2 pt-4">
+      <h3>My Account</h3>
+    </div>
+    <div class="container">
+      <div class="row p-b-50 mt-4">
+        <div class="col-md-12 col-lg-12">
+          <div class="">
+            <div class="d-flex w-100">
+              <div class="me-auto">
+                <h3 class="mtext-111 cl2 p-b-16 text-primary">
+                  Profile Details
+                </h3>
+              </div>
+              <div class="d-flex">
+                <!-- <button class="btn btn-outline-dark mr-2">
+                  Edit Profile
+                </button> -->
+                <a href="/logout" class="btn btn-outline-danger">Logout</a>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <h6><strong>Name</strong></h6>
+                  <p class="stext-113 cl6 p-b-26"><%= user.name %></p>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <h6><strong>Address</strong></h6>
+                  <p class="stext-113 cl6 p-b-26"><%= user.address %></p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <h6><strong>Telephone</strong></h6>
+                  <p class="stext-113 cl6 p-b-26"><%= user.telephone %></p>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <h6><strong>Email</strong></h6>
+                  <p class="stext-113 cl6 p-b-26"><%= user.email %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row p-b-148 mt-4">
+        <div class="col-md-12 col-lg-12">
+          <div class="">
+            <h3 class="mtext-111 cl2 p-b-16 text-primary">Your Orders</h3>
+            <% if (orders.length == 0) { %>
+            <span>You have no orders.</span>
+            <% } else{ %> <% orders.forEach(function(order) { %>
+            <div class="row mb-3">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="d-flex">
+                      <div class="mr-auto">
+                        <strong>Order ID : <%= order._id %></strong>
+                      </div>
+                      <div>
+                        <span class="badge badge-dark"
+                          ><%= order.status %></span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="my-2">
+                      <strong>Items</strong>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Size</th>
+                            <th scope="col">Unit Price</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% var total = 0; %> <%
+                          order.items.forEach(function(item, index) { %>
+                          <tr>
+                            <th scope="row"><%= index + 1 %></th>
+                            <td><%= item.product.name %></td>
+                            <td><%= item.size %></td>
+                            <td>$<%= item.price %></td>
+                            <td><%= item.quantity %></td>
+                            <td>$<%= item.quantity * item.price %></td>
+                          </tr>
+                          <% total += (item.quantity * item.price); }) %>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="d-flex flex-column">
+                          <div class="my-2">
+                            <strong>Shipping Address</strong>
+                            <p class="mb-0"><%= order.shippingAddress %></p>
+                          </div>
+                          <div class="my-2">
+                            <strong>Payment Method</strong>
+                            <p class="mb-0"><%= order.paymentMethod %></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="my-2">
+                          <strong>Telephone</strong>
+                          <p class="mb-0"><%= order.telephone %></p>
+                        </div>
+                        <div class="my-2">
+                          <strong>Order Total</strong>
+                          <h4><strong>$ <%= order.totalPrice %></strong></h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }); } %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
